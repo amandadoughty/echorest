@@ -49,11 +49,12 @@ foreach ($terms->term as $term) {
 
 foreach ($sections as $section) {
     foreach ($section->properties->property as $property) {
+
         if ($property->key == 'external-system-id-1' && $property->value != '') {
             echo $property->value . "\n";
 
 
-            $doc = new DOMDocument('1.0');
+            $doc = new DOMDocument();
             $doc->preserveWhiteSpace = false;
             $doc->formatOutput = true;
 
@@ -67,7 +68,14 @@ foreach ($sections as $section) {
             $text = $alternateId->appendChild($text);
 
 
-            $doc->save("data/{$section->id}.xml");
+            // $doc->save("data/{$section->id}.xml");
+
+            $url = "sections/{$section->id}";
+            $xml = "data/{$section->id}.xml";
+            $method = "PUT";
+            $params = array();
+
+            $result = callRestService("$url", "$xml", "$method", $params);
 
 
         }
