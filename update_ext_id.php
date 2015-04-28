@@ -54,7 +54,7 @@ foreach ($sections as $section) {
             echo $property->value . "\n";
 
 
-            $doc = new DOMDocument();
+            $doc = new DOMDocument('1.0', 'UTF-8');
             $doc->preserveWhiteSpace = false;
             $doc->formatOutput = true;
 
@@ -71,7 +71,7 @@ foreach ($sections as $section) {
             // $doc->save("data/{$section->id}.xml");
 
             $url = "sections/{$section->id}";
-            $xml = "data/{$section->id}.xml";
+            $xml = $doc->saveXML(); //"data/{$section->id}.xml";
             $method = "PUT";
             $params = array();
 
